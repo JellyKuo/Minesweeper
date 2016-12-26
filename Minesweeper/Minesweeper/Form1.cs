@@ -127,8 +127,9 @@ namespace Minesweeper
 
             //Finalizing
             remainMine = mineCount;
-            FlagStripItem.Text = "🕐: " + remainMine.ToString();
-            gameTimer.Enabled = true;
+            FlagStripItem.Text = "⚑ : " + remainMine.ToString();
+            ClockStripItem.Text = " 🕐: " + timerTime.ToString();
+
             Time.Start();
             //Finalizing
         }//生成&設定物件
@@ -137,6 +138,7 @@ namespace Minesweeper
         {
             Button sendButton = (Button)sender;
             Point pos = (Point)sendButton.Tag;
+            gameTimer.Enabled = true;
 
             if (e.Button == MouseButtons.Left&&sendButton.Text=="")
             {
