@@ -78,13 +78,13 @@ namespace Minesweeper
                     buttonArr[a, b].Font = buttonPanel.Font;
                     x += 75;
                     buttonPanel.Controls.Add(buttonArr[a, b]);
-                    buttonArr[a, b]. MouseUp +=new MouseEventHandler(buttonClick);
+                    buttonArr[a, b].MouseUp += new MouseEventHandler(buttonClick);
                     buttonArr[a, b].Tag = new Point(a, b);
                 }
                 x = 25;
                 y += 75;
             }
-            
+
             this.Width = 75 * (size + 1) - 25;
             this.Height = 75 * (size + 1) + 25;
             buttonPanel.Size = this.Size;
@@ -106,7 +106,7 @@ namespace Minesweeper
             //Generate Mines
 
             //Adding Numbers
-            for (int b = 0; b< size; b++)
+            for (int b = 0; b < size; b++)
             {
                 for (int a = 0; a < size; a++)
                 {
@@ -140,7 +140,7 @@ namespace Minesweeper
             Point pos = (Point)sendButton.Tag;
             gameTimer.Enabled = true;
 
-            if (e.Button == MouseButtons.Left&&sendButton.Text=="")
+            if (e.Button == MouseButtons.Left && sendButton.Text == "")
             {
                 switch (Mine[pos.X, pos.Y])
                 {
@@ -188,7 +188,7 @@ namespace Minesweeper
                 if (CompleteDetect())
                     EndGame(true);
             }
-            else if(e.Button == MouseButtons.Right&&sendButton.Text == "" && remainMine>0)
+            else if (e.Button == MouseButtons.Right && sendButton.Text == "" && remainMine > 0)
             {
                 sendButton.Text = "⚑";
                 sendButton.ForeColor = Color.Red;
@@ -210,15 +210,15 @@ namespace Minesweeper
             if (pos.X - 1 >= 0)
                 if (buttonArr[pos.X - 1, pos.Y].Enabled == true)
                     buttonClick(buttonArr[pos.X - 1, pos.Y], e);
-            if(pos.X+1<size)
-                if (buttonArr[pos.X +1, pos.Y].Enabled == true)
+            if (pos.X + 1 < size)
+                if (buttonArr[pos.X + 1, pos.Y].Enabled == true)
                     buttonClick(buttonArr[pos.X + 1, pos.Y], e);
-            if(pos.Y-1>=0)
-            if (buttonArr[pos.X, pos.Y-1].Enabled == true)
-                buttonClick(buttonArr[pos.X , pos.Y-1], e);
+            if (pos.Y - 1 >= 0)
+                if (buttonArr[pos.X, pos.Y - 1].Enabled == true)
+                    buttonClick(buttonArr[pos.X, pos.Y - 1], e);
             if (pos.Y + 1 < size)
-                if (buttonArr[pos.X, pos.Y+1].Enabled == true)
-                    buttonClick(buttonArr[pos.X , pos.Y+1], e);
+                if (buttonArr[pos.X, pos.Y + 1].Enabled == true)
+                    buttonClick(buttonArr[pos.X, pos.Y + 1], e);
         }//檢查空格
 
         private bool CompleteDetect()
@@ -226,7 +226,7 @@ namespace Minesweeper
             for (int b = 0; b < size; b++)
                 for (int a = 0; a < size; a++)
                 {
-                    if ((buttonArr[a, b].Text == string.Empty||buttonArr[a,b].Text == "⚑") && Mine[a, b] < 10&&buttonArr[a,b].Enabled ==true)
+                    if ((buttonArr[a, b].Text == string.Empty || buttonArr[a, b].Text == "⚑") && Mine[a, b] < 10 && buttonArr[a, b].Enabled == true)
                         return false;
                 }
             return true;
@@ -239,7 +239,7 @@ namespace Minesweeper
             if (isWin == true)
             {
                 FillAll();
-                MessageBox.Show("你贏了\n消耗秒數: " + timerTime.ToString() +"\n計時器時長: " + Time.Elapsed.ToString(), "恭喜!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("你贏了\n消耗秒數: " + timerTime.ToString() + "\n計時器時長: " + Time.Elapsed.ToString(), "恭喜!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Init();
             }
             else if (isWin == false)
@@ -361,13 +361,13 @@ namespace Minesweeper
                 case DialogResult.Cancel:
                     break;
             }
-            
+
         }
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             timerTime++;
-            ClockStripItem.Text = "🕐: " + timerTime.ToString(); 
+            ClockStripItem.Text = "🕐: " + timerTime.ToString();
         }
 
         private void FillAllStripItem_Click(object sender, EventArgs e)
