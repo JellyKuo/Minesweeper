@@ -206,7 +206,19 @@ namespace Minesweeper
         private void EmptyDetect(Point pos)
         {
             buttonArr[pos.X, pos.Y].Enabled = false;
-            
+            MouseEventArgs e = new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0);
+            if (pos.X - 1 >= 0)
+                if (buttonArr[pos.X - 1, pos.Y].Enabled == true)
+                    buttonClick(buttonArr[pos.X - 1, pos.Y], e);
+            if(pos.X+1<size)
+                if (buttonArr[pos.X +1, pos.Y].Enabled == true)
+                    buttonClick(buttonArr[pos.X + 1, pos.Y], e);
+            if(pos.Y-1>=0)
+            if (buttonArr[pos.X, pos.Y-1].Enabled == true)
+                buttonClick(buttonArr[pos.X , pos.Y-1], e);
+            if (pos.Y + 1 < size)
+                if (buttonArr[pos.X, pos.Y+1].Enabled == true)
+                    buttonClick(buttonArr[pos.X , pos.Y+1], e);
         }//檢查空格
 
         private bool CompleteDetect()
