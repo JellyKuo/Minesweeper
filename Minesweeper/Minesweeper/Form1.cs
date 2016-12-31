@@ -300,6 +300,12 @@ namespace Minesweeper
                 }
         }//填滿
 
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            timerTime++;
+            ClockStripItem.Text = "🕐: " + timerTime.ToString();
+        }
+
 
         private void ResetStripItem_Click(object sender, EventArgs e)
         {
@@ -364,10 +370,37 @@ namespace Minesweeper
 
         }
 
-        private void gameTimer_Tick(object sender, EventArgs e)
+        private void AboutStripItem_Click(object sender, EventArgs e)
         {
-            timerTime++;
-            ClockStripItem.Text = "🕐: " + timerTime.ToString();
+            DialogResult visit = new DialogResult();
+            visit = MessageBox.Show("Written by 郭東岳 with <3\n2016/12/31\n感謝所有協助我完成的人類&Google姊姊\n\n  http://github.com/JellyKuo/Minesweeper  \n  瀏覽?", "關於",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+            if(visit == DialogResult.Yes)
+                Process.Start("http://github.com/JellyKuo/Minesweeper");
+        }
+
+        private void opensStripItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Opens.ToString(), "Mine");
+        }
+
+        private void TimeStripItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Time.Elapsed.ToString(), "Mine");
+        }
+
+        private void sizeStripItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(size.ToString(), "size");
+        }
+
+        private void mineCountStripItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(mineCount.ToString(), "mineCount");
+        }
+
+        private void timerTimeStripItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(timerTime.ToString(), "timerTime");
         }
 
         private void FillAllStripItem_Click(object sender, EventArgs e)
