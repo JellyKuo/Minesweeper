@@ -50,11 +50,13 @@
             this.CompleteDetectStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EndGameStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FillAllStripItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonPanel = new System.Windows.Forms.Panel();
             this.遊戲狀態ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ClockStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FlagStripItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonPanel = new System.Windows.Forms.Panel();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.AboutStripItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerTimeStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,9 +65,10 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.GameStripItem,
             this.debugToolStripMenuItem,
+            this.AboutStripItem,
             this.遊戲狀態ToolStripMenuItem,
-            this.ClockStripItem,
-            this.FlagStripItem});
+            this.FlagStripItem,
+            this.ClockStripItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(436, 24);
@@ -88,7 +91,7 @@
             this.QuickResetStripItem,
             this.ResetStripItem});
             this.RestartStripItem.Name = "RestartStripItem";
-            this.RestartStripItem.Size = new System.Drawing.Size(152, 22);
+            this.RestartStripItem.Size = new System.Drawing.Size(122, 22);
             this.RestartStripItem.Text = "重新開始";
             // 
             // QuickResetStripItem
@@ -108,14 +111,14 @@
             // SetStripItem
             // 
             this.SetStripItem.Name = "SetStripItem";
-            this.SetStripItem.Size = new System.Drawing.Size(152, 22);
+            this.SetStripItem.Size = new System.Drawing.Size(122, 22);
             this.SetStripItem.Text = "設定";
             this.SetStripItem.Click += new System.EventHandler(this.SetStripItem_Click);
             // 
             // ExitStripItem
             // 
             this.ExitStripItem.Name = "ExitStripItem";
-            this.ExitStripItem.Size = new System.Drawing.Size(152, 22);
+            this.ExitStripItem.Size = new System.Drawing.Size(122, 22);
             this.ExitStripItem.Text = "離開";
             this.ExitStripItem.Click += new System.EventHandler(this.ExitStripItem_Click);
             // 
@@ -135,7 +138,8 @@
             this.mineCountStripItem,
             this.sizeStripItem,
             this.opensStripItem,
-            this.TimeStripItem});
+            this.TimeStripItem,
+            this.timerTimeStripItem});
             this.ViewVariablesStripItem.Name = "ViewVariablesStripItem";
             this.ViewVariablesStripItem.Size = new System.Drawing.Size(156, 22);
             this.ViewVariablesStripItem.Text = "View Variables";
@@ -143,33 +147,37 @@
             // MineStripItem
             // 
             this.MineStripItem.Name = "MineStripItem";
-            this.MineStripItem.Size = new System.Drawing.Size(136, 22);
+            this.MineStripItem.Size = new System.Drawing.Size(152, 22);
             this.MineStripItem.Text = "Mine";
             this.MineStripItem.Click += new System.EventHandler(this.MineStripItem_Click);
             // 
             // mineCountStripItem
             // 
             this.mineCountStripItem.Name = "mineCountStripItem";
-            this.mineCountStripItem.Size = new System.Drawing.Size(136, 22);
+            this.mineCountStripItem.Size = new System.Drawing.Size(152, 22);
             this.mineCountStripItem.Text = "mineCount";
+            this.mineCountStripItem.Click += new System.EventHandler(this.mineCountStripItem_Click);
             // 
             // sizeStripItem
             // 
             this.sizeStripItem.Name = "sizeStripItem";
-            this.sizeStripItem.Size = new System.Drawing.Size(136, 22);
+            this.sizeStripItem.Size = new System.Drawing.Size(152, 22);
             this.sizeStripItem.Text = "size";
+            this.sizeStripItem.Click += new System.EventHandler(this.sizeStripItem_Click);
             // 
             // opensStripItem
             // 
             this.opensStripItem.Name = "opensStripItem";
-            this.opensStripItem.Size = new System.Drawing.Size(136, 22);
+            this.opensStripItem.Size = new System.Drawing.Size(152, 22);
             this.opensStripItem.Text = "opens";
+            this.opensStripItem.Click += new System.EventHandler(this.opensStripItem_Click);
             // 
             // TimeStripItem
             // 
             this.TimeStripItem.Name = "TimeStripItem";
-            this.TimeStripItem.Size = new System.Drawing.Size(136, 22);
+            this.TimeStripItem.Size = new System.Drawing.Size(152, 22);
             this.TimeStripItem.Text = "Time";
+            this.TimeStripItem.Click += new System.EventHandler(this.TimeStripItem_Click);
             // 
             // ExecuteStripItem
             // 
@@ -226,14 +234,6 @@
             this.FillAllStripItem.Text = "FillAll";
             this.FillAllStripItem.Click += new System.EventHandler(this.FillAllStripItem_Click);
             // 
-            // buttonPanel
-            // 
-            this.buttonPanel.Font = new System.Drawing.Font("微軟正黑體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.buttonPanel.Location = new System.Drawing.Point(0, 25);
-            this.buttonPanel.Name = "buttonPanel";
-            this.buttonPanel.Size = new System.Drawing.Size(50, 50);
-            this.buttonPanel.TabIndex = 1;
-            // 
             // 遊戲狀態ToolStripMenuItem
             // 
             this.遊戲狀態ToolStripMenuItem.Name = "遊戲狀態ToolStripMenuItem";
@@ -242,24 +242,50 @@
             // 
             // ClockStripItem
             // 
+            this.ClockStripItem.AutoToolTip = true;
             this.ClockStripItem.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClockStripItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ClockStripItem.Name = "ClockStripItem";
             this.ClockStripItem.Size = new System.Drawing.Size(37, 20);
             this.ClockStripItem.Text = "🕐: ";
+            this.ClockStripItem.ToolTipText = "剩餘時間";
             // 
             // FlagStripItem
             // 
+            this.FlagStripItem.AutoToolTip = true;
             this.FlagStripItem.BackColor = System.Drawing.Color.LightCoral;
             this.FlagStripItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.FlagStripItem.Name = "FlagStripItem";
             this.FlagStripItem.Size = new System.Drawing.Size(34, 20);
             this.FlagStripItem.Text = "⚑: ";
+            this.FlagStripItem.ToolTipText = "剩餘炸彈";
+            // 
+            // buttonPanel
+            // 
+            this.buttonPanel.Font = new System.Drawing.Font("微軟正黑體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonPanel.Location = new System.Drawing.Point(0, 25);
+            this.buttonPanel.Name = "buttonPanel";
+            this.buttonPanel.Size = new System.Drawing.Size(50, 50);
+            this.buttonPanel.TabIndex = 1;
             // 
             // gameTimer
             // 
             this.gameTimer.Interval = 1000;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
+            // 
+            // AboutStripItem
+            // 
+            this.AboutStripItem.Name = "AboutStripItem";
+            this.AboutStripItem.Size = new System.Drawing.Size(43, 20);
+            this.AboutStripItem.Text = "關於";
+            this.AboutStripItem.Click += new System.EventHandler(this.AboutStripItem_Click);
+            // 
+            // timerTimeStripItem
+            // 
+            this.timerTimeStripItem.Name = "timerTimeStripItem";
+            this.timerTimeStripItem.Size = new System.Drawing.Size(152, 22);
+            this.timerTimeStripItem.Text = "timerTime";
+            this.timerTimeStripItem.Click += new System.EventHandler(this.timerTimeStripItem_Click);
             // 
             // Form1
             // 
@@ -269,7 +295,7 @@
             this.Controls.Add(this.buttonPanel);
             this.Controls.Add(this.menuStrip);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "踩地雷";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -306,6 +332,8 @@
         private System.Windows.Forms.ToolStripMenuItem ClockStripItem;
         private System.Windows.Forms.ToolStripMenuItem FlagStripItem;
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.ToolStripMenuItem AboutStripItem;
+        private System.Windows.Forms.ToolStripMenuItem timerTimeStripItem;
     }
 }
 
